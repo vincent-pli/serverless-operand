@@ -1,0 +1,19 @@
+domain: ibm.dev
+layout:
+- go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: serverless-operand
+repo: github.com/vincent-pli/serverless-operand
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: ibm.dev
+  group: ibm.dev
+  kind: Expressapp
+  path: github.com/vincent-pli/serverless-operand/api/v1alpha1
+  version: v1alpha1
+version: "3"
