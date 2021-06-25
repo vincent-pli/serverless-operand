@@ -33,6 +33,7 @@ import (
 
 	ibmdevv1alpha1 "github.com/vincent-pli/serverless-operand/api/v1alpha1"
 	"github.com/vincent-pli/serverless-operand/controllers"
+	knativeserving "knative.dev/serving/pkg/apis/serving/v1"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -45,6 +46,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(ibmdevv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(knativeserving.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
