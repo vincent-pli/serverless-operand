@@ -22,3 +22,15 @@ rules:
   - expressapps/status
   verbs:
   - get
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - *
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
