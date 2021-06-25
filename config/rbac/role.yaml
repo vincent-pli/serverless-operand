@@ -1,23 +1,35 @@
-# permissions for end users to view expressapps.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: expressapp-viewer-role
+  creationTimestamp: null
+  name: manager-role
 rules:
 - apiGroups:
   - ibm.dev.ibm.dev
   resources:
   - expressapps
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
+- apiGroups:
+  - ibm.dev.ibm.dev
+  resources:
+  - expressapps/finalizers
+  verbs:
+  - update
 - apiGroups:
   - ibm.dev.ibm.dev
   resources:
   - expressapps/status
   verbs:
   - get
+  - patch
+  - update
 - apiGroups:
   - serving.knative.dev
   resources:
