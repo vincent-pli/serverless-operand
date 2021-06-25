@@ -34,7 +34,7 @@ expressapp-sample-ksvc-00001-deployment-576946dfdb-t2h6p   2/2     Running   0  
 
 - Active the `pod`
 About 60s the `pod` will terminated(scale to 0, it's configurable), the we could active it by send a request:   
-`curl -H "Host: http://expressapp-sample-ksvc.default.example.com" http://9.28.237.203:31319`    
+`curl -H "Host: expressapp-sample-ksvc.default.example.com" http://9.28.237.203:31319`    
 The `9.28.237.203` is the public ip of your node  
 The `31319` is the host port for 80 in svc: `istio-system/istio-ingressgateway` 
 
@@ -43,4 +43,12 @@ The `31319` is the host port for 80 in svc: `istio-system/istio-ingressgateway`
 [root@symtest11 rbac]# kubectl get po
 NAME                                                       READY   STATUS    RESTARTS   AGE
 expressapp-sample-ksvc-00001-deployment-576946dfdb-2lwpm   2/2     Running   0          31s
+```
+
+## Make initial-scale as 0 (after create `KSVC` the pod will not startup until request comming)
+`kubectl -n knative-serving edit cm config-autoscaler`
+then add below setting to the `data`
+```
+  allow-zero-initial-scale: "true"
+  initial-scale: "0"
 ```
