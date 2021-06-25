@@ -29,8 +29,8 @@ import (
 func MakeKSVC(source *v1alpha1.Expressapp) *knativeserving.Service {
 	return &knativeserving.Service{
 		ObjectMeta: metav1.ObjectMeta{
-			GenerateName: fmt.Sprintf("%s-ksvc", source.Name),
-			Namespace:    source.Namespace,
+			Name:      fmt.Sprintf("%s-ksvc", source.Name),
+			Namespace: source.Namespace,
 		},
 		Spec: knativeserving.ServiceSpec{
 			ConfigurationSpec: knativeserving.ConfigurationSpec{

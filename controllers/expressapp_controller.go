@@ -28,6 +28,7 @@ import (
 	knativeserving "knative.dev/serving/pkg/apis/serving/v1"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	ibmdevv1alpha1 "github.com/vincent-pli/serverless-operand/api/v1alpha1"
 )
@@ -78,6 +79,10 @@ func (r *ExpressappReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 		// Define a new deployment
 		ksvc := resources.MakeKSVC(expressApp)
 		r.Log.Info("Creating a new KSVC", "KSVC.Namespace", ksvc.Namespace, "KSVC.Name", ksvc.Name)
+
+		if err := controllerutil.SetControllerReference(expressApp, ksvc, r.Scheme); err != nil {
+			return ctrl.Result{}, err
+		}
 
 		err = r.Create(ctx, ksvc)
 		if err != nil {
