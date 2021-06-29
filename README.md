@@ -79,7 +79,8 @@ kubectl -n knative-serving edit cm config-autoscaler
 
 then add below setting to the `data`
 
-```
+```yaml
+data:
   allow-zero-initial-scale: "true"
   initial-scale: "0"
 ```
